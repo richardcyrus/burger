@@ -9,13 +9,42 @@ const db = require('../config/orm');
 const table = 'burgers';
 
 const burger = {
+    /**
+     * Retrieve all records from the database and send the results to
+     * the `callback`.
+     *
+     * @param callback
+     */
     all: (callback) => {
         db.selectAll(table, (res) => callback(res));
     },
-    create: (fields, values, callback) => {
-        db.insertOne(table, fields, values, (res) => callback(res));
+
+    /**
+     * Create a new record in the database, and pass any status to the
+     * `callback`
+     *
+     * @param value
+     * @param callback
+     */
+    create: (value, callback) => {
+        db.insertOne(table, 'burger_name', value, (res) => callback(res));
     },
-    update: (values, criteria, callback) => {
+
+    /**
+     * Update a record in the database, and pass any status to the
+     * `callback`
+     *
+     * @param value
+     * @param callback
+     */
+    update: (value, callback) => {
+        const values = {
+            'devoured': true,
+        };
+        const criteria = {
+            'id': value,
+        };
+
         db.updateOne(table, values, criteria, (res) => callback(res));
     },
 };
