@@ -36,9 +36,10 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-12 col-md-6 text-center">
-        <form id="new-burger" method="post" action="#">
+        <form id="new-burger" method="post" autocomplete="off" novalidate>
             <div class="form-group">
-                <input name="burger_name" id="burger_name" class="form-control">
+                <input name="burger_name" id="burger_name" class="form-control" required>
+                <div class="invalid-feedback">Please enter the name of a burger.</div>
             </div>
             <button class="btn btn-primary" id="create-burger" type="submit">Submit</button>
         </form>

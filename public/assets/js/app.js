@@ -7,18 +7,19 @@
 /* global location jQuery */
 
 (function($) {
+    const form = $('#new-burger');
+
     /**
      * Click handler for the `Devour It!` buttons.
      *
      * Uses delegate registration because the buttons may not exist at
      * page load.
      */
-    $('#ready-to-eat').on('click', '.eat', (event) => {
+    $('#ready-to-eat').on('click', '.eat', function(event) {
         event.preventDefault();
         const el = event.target;
 
         const itemClicked = parseInt($(el).data('burger-id'));
-        console.log(itemClicked);
 
         const request = {
             method: 'PUT',
@@ -35,21 +36,41 @@
     /**
      * Form submission handler for the new burger name input.
      */
-    $('#new-burger').on('submit', (event) => {
-        event.preventDefault();
+    form.on('submit', function(event) {
+        /**
+         * Trigger client side form validation. Prevents sending an
+         * empty name.
+         *
+         * The checkValidity() call has to occur on a form node.
+         *
+         * $(this) = [form#new-burger]
+         * $(this)[0] = the full form HTML with all fields.
+         */
+        if (form[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.addClass('was-validated');
 
-        const name = $('input[name="burger_name"]').val().trim();
-        console.log(name);
+        // If the form has been completed correctly, process it.
+        if (!event.isDefaultPrevented()) {
+            event.preventDefault();
 
-        const request = {
-            method: 'POST',
-            url: '/',
-            data: { burgerName: name },
-        };
+            const name = $('input[name="burger_name"]').val().trim();
 
-        $.ajax(request)
-            .done(function() {
-                location.reload();
-            });
+            const request = {
+                method: 'POST',
+                url: '/',
+                data: { burgerName: name },
+            };
+
+            $.ajax(request)
+                .done(function() {
+                    form[0].reset();
+                    location.reload();
+                });
+
+            return false;
+        }
     });
 })(jQuery);
