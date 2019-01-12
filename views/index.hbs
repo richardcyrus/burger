@@ -1,2 +1,46 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="row justify-content-md-around">
+    <div id="ready-to-eat" class="col-12 col-md-6">
+        <h4 class="d-md-none text-center">Ready to Eat!</h4>
+        {{#each burgers}}
+            {{#unless this.devoured}}
+                <div class="card bg-light mb-2">
+                    <div class="card-body py-2">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text align-baseline my-0 mt-1">{{this.id}}.&nbsp;{{this.burger_name}}</p>
+                            <button type="button" role="button" data-burger-id="{{this.id}}" class="btn btn-sm btn-secondary eat">Devour It!</button>
+                        </div>
+                    </div>
+                </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div id="devoured" class="col-12 col-md-6 mt-4 mt-md-0">
+        <h4 class="d-md-none text-center">Already Devoured!</h4>
+        {{#each burgers}}
+            {{#if this.devoured}}
+                <div class="card bg-light mb-2">
+                    <div class="card-body py-2">
+                        <p class="card-text my-1 text-muted">
+                            {{this.id}}.&nbsp;{{this.burger_name}}
+                        </p>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 text-center">
+        <p class="mt-3">Enter the name of a burger you'd like to eat and click the button</p>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6 text-center">
+        <form id="new-burger" method="post" action="#">
+            <div class="form-group">
+                <input name="burger_name" id="burger_name" class="form-control">
+            </div>
+            <button class="btn btn-primary" id="create-burger" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
