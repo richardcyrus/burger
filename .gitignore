@@ -69,3 +69,5 @@ typings/
 # The project's Launch file.
 !bin
 !bin/www
+
+.DS_Store
