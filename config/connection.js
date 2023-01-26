@@ -5,22 +5,16 @@
  * (c) 2019 Richard Cyrus <richard.cyrus@rcyrus.com>
  */
 
-const mysql = require('mysql');
-let connection;
+const mysql = require('mysql2')
+let connection
 
-if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
+if (process.env.MYSQL_URL) {
+  connection = mysql.createConnection(process.env.MYSQL_URL)
 } else {
-    require('dotenv').config();
-    connection = mysql.createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: 'burgers_db',
-    });
+  require('dotenv').config()
+  connection = mysql.createConnection(process.env.MYSQL_URL)
 }
 
-connection.connect();
+connection.connect()
 
-module.exports = connection;
+module.exports = connection
