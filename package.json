@@ -1,6 +1,6 @@
 {
   "name": "burger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Eat-Da-Burger! is a restaurant app that lets users input the names of burgers they'd like to eat.",
   "private": true,
   "scripts": {
