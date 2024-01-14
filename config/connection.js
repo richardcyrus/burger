@@ -10,18 +10,18 @@ let connection
 
 if (process.env.MYSQL_URL) {
   connection = mysql.createPool({
-      uri: process.env.MYSQL_URL,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
+    uri: process.env.MYSQL_URL,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
   })
 } else {
   require('dotenv').config()
   connection = mysql.createPool({
-      uri: process.env.MYSQL_URL,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
+    uri: process.env.MYSQL_URL,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
   })
 }
 
